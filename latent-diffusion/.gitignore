@@ -1,0 +1,12 @@
+./cel*
+./data
+./discarded_vqf8
+./enc224
+./*.out
+./models/first_stage_models/vq-f4/model.ckpt
+./src
+**/__pycache__/
+**/*.ckpt
+./*.slurm
+./logs
+

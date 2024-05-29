@@ -324,7 +324,24 @@ class DDPM(pl.LightningModule):
         # b, c, h, w, device, img_size, = *x.shape, x.device, self.image_size
         # assert h == img_size and w == img_size, f'height and width of image must be {img_size}'
         # t = torch.randint(0, self.num_timesteps, (x.shape[0],), device=self.device).long()
-        choose_stage = random.randint(1, 3)
+        rank = int(str(self.device).split(":")[1])
+        # random_num = torch.rand(size=(1,)).item()
+        # if rank % 2 == 0:
+        #     if random_num <= 2/3:
+        #         choose_stage = 1
+        #     else:
+        #         choose_stage = 3
+        # else:
+        #     if random_num <= 2/3:
+        #         choose_stage = 2
+        #     else:
+        #         choose_stage = 3
+        choose_stage = (rank%3)+1
+        # choose_stage = torch.randint(1, 4, (1,)).long().item()
+        # global stage_count
+        # choose_stage = stage_count+1
+        # stage_count += 1
+        # stage_count %= 3
         stages = [0,442,631,1000]
         lower = stages[choose_stage-1]
         upper = stages[choose_stage]

@@ -1,6 +1,6 @@
-# Score-Based Generative Model with DPM-Solver
+# Multistage score-Based Generative Model with DPM-Solver
 
-We support the PyTorch version for DPM-Solver in this repo. The example command can be found in `sample.sh`. We used the `cifar10_ddpmpp_deep_continuous` pretrained `checkpoint_8.pth` in [Yang Song's google drive](https://drive.google.com/drive/folders/1ZMLBiu9j7-rpdTQu8M2LlHAEQq4xRYrj).
+We support the PyTorch version for DPM-Solver in this repo, with our multistage architecture. The example command can be found in `sample.sh`.
 
 The stats file for evaluating the FID on CIFAR-10 is the same as the original repo. You can download [`cifar10_stats.npz`](https://drive.google.com/file/d/14UB27-Spi8VjZYKST3ZcT8YVhAluiFWI/view?usp=sharing)  and save it to `assets/stats/`.
 

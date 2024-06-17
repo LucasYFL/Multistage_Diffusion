@@ -66,11 +66,6 @@ torchrun --standalone --nproc_per_node=1 fid.py calc --images=../fid-tmp --ref=.
 ## LDM
 
 ### Requirements
-```sh
-conda create -n multistage-ldm python=3.9
-conda activate multistage-ldm
-pip install -r ./latent-diffusion/requirements.txt
-```
 
 ### Training
 

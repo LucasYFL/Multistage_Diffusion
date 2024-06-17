@@ -1,4 +1,4 @@
-name: ldm
+name: multistage-ldm
 channels:
   - pytorch
   - defaults

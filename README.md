@@ -14,6 +14,10 @@ Extensive numerical experiments affirm the effectiveness of our framework, showc
 
 This repository is based on [DPM-solver](https://github.com/LuChengTHU/dpm-solver), [EDM](https://github.com/NVlabs/edm) and [LDM](https://github.com/CompVis/latent-diffusion). We adding the multistage strategy to both of this three repositories. For the following sections, we provide detailed instructions for running each architecture. 
 
+## Pretrained model
+
+All models mentioned in the paper could be downloaded [here](https://drive.google.com/drive/folders/1Zo3ZUTOgLaaPW7E5GeXuBwIoYjS2VDWv?usp=drive_link), including multistage-dpm-solver for CIFAR-10 dataset, multistage-edm for CIFAR-10 and CelebA dataset, multistage-ldm for CelebA dataset.
+
 ## DPM-Solver
 
 ### Requirements
@@ -31,19 +35,42 @@ conda env create -f edm/environment.yml -n multistage-edm
 conda activate multistage-edm
 ```
 
+### Preparing dataset
+
+For training and evaluation dataset preparation (''cifar10-32x32.zip'', ''cifar10-fid.npz'', ''celebA_32_edm_fid.npz'',), please go to [preparing dataset of EDM](https://github.com/NVlabs/edm?tab=readme-ov-file#preparing-datasets).
+
 ### Training
 
 ```sh
 # Train DDPM++ model for unconditional CIFAR-10 using 4 GPUs
 cd edm
-torchrun --standalone --nproc_per_node=4 train.py --outdir=training-runs --data=datasets/cifar10-32x32.zip --cond=0 --arch=ddpmpp-multistage --batch=128
+torchrun --standalone --nproc_per_node=4 train.py --outdir=../training-runs --data=../dataset/cifar10-32x32.zip --cond=0 --arch=ddpmpp-multistage --batch=128
 ```
 
 ### Evaluation
 
+```sh
+# evaluate multistage-edm on CelebA dataset
+cd edm
+torchrun --standalone --nproc_per_node=1 generate.py --outdir=../fid-tmp --seeds=00000-49999 --network=../model/multistage_edm_celeba.pkl --batch=512
+
+torchrun --standalone --nproc_per_node=1 fid.py calc --images=../fid-tmp --ref=../dataset/celebA_32_edm_fid.npz
+
+# evaluate multistage-edm on CIFAR-10 dataset
+cd edm
+torchrun --standalone --nproc_per_node=1 generate.py --outdir=../fid-tmp --seeds=00000-49999 --network=../model/multistage_edm_cifar10.pkl --batch=512
+
+torchrun --standalone --nproc_per_node=1 fid.py calc --images=../fid-tmp --ref=../dataset/cifar10-fid.npz
+```
+
 ## LDM
 
 ### Requirements
+```sh
+conda create -n multistage-ldm python=3.9
+conda activate multistage-ldm
+pip install -r ./latent-diffusion/requirements.txt
+```
 
 ### Training
 

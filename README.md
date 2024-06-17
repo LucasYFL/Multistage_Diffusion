@@ -1,6 +1,6 @@
 # Improving Training Efficiency of Diffusion Models via Multi-Stage Framework and Tailored Multi-Decoder Architecture
 
-[Huijie Zhang *](https://www.huijiezh.com/), [Yifu Lu *](https://scholar.google.com/citations?user=ybsmKpsAAAAJ&hl=en), [Ismail Alkhouri](https://sites.google.com/view/ismailalkhouri/about), [Saiprasad Ravishankar](https://sites.google.com/site/sairavishankar3/home), [Dogyoon Song](https://sites.google.com/view/dogyoonsong/home), [Qing Qu](https://qingqu.engin.umich.edu/).
+[Huijie Zhang*](https://www.huijiezh.com/), [Yifu Lu*](https://scholar.google.com/citations?user=ybsmKpsAAAAJ&hl=en), [Ismail Alkhouri](https://sites.google.com/view/ismailalkhouri/about), [Saiprasad Ravishankar](https://sites.google.com/site/sairavishankar3/home), [Dogyoon Song](https://sites.google.com/view/dogyoonsong/home), [Qing Qu](https://qingqu.engin.umich.edu/).
 
 [Paper](https://openaccess.thecvf.com/content/CVPR2024/papers/Zhang_Improving_Training_Efficiency_of_Diffusion_Models_via_Multi-Stage_Framework_and_CVPR_2024_paper.pdf) | [arXiv](https://arxiv.org/abs/2312.09181)
 
@@ -37,7 +37,7 @@ conda activate multistage-edm
 
 ### Preparing dataset
 
-For training and evaluation dataset preparation (''cifar10-32x32.zip'', ''cifar10-fid.npz'', ''celebA_32_edm_fid.npz'',), please go to [preparing dataset of EDM](https://github.com/NVlabs/edm?tab=readme-ov-file#preparing-datasets).
+For training and evaluation dataset preparation, please go to [preparing dataset of EDM](https://github.com/NVlabs/edm?tab=readme-ov-file#preparing-datasets).
 
 ### Training
 

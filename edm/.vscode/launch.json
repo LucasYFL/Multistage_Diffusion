@@ -1,0 +1,51 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "train_torchrun",
+            "type": "python",
+            "request": "launch",
+            "program": "/opt/conda/envs/edm/lib/python3.9/site-packages/torch/distributed/run.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--standalone",
+                "--nproc_per_node=1",
+                "--master_port=29600",
+                "train.py",
+                "--outdir",
+                "/home/ubuntu/exp/multistage/test",
+                "--data",
+                "/home/ubuntu/dataset/edm/cifar10/dataset/cifar10-32x32.zip",
+                "--cond=0",
+                "--cres=1,2,2,2",
+                "--arch",
+                "ddpmpp-multistage",
+                "--batch-gpu=32",
+            ]
+        },
+        {
+            "name": "prepare_dataset",
+            "type": "python",
+            "request": "launch",
+            "program": "/opt/conda/envs/edm/lib/python3.9/site-packages/torch/distributed/run.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--standalone",
+                "--nproc_per_node=1",
+                "--master_port=29600",
+                "dataset_tool.py",
+                "--source",
+                "/home/ubuntu/dataset/celeba/img_align_celeba/",
+                "--dest",
+                "/home/ubuntu/dataset/celeba/celebA_edm.zip",
+                "--transform=center-crop-wide",
+                "--resolution=64x64"
+            ]
+        },
+    ]
+}

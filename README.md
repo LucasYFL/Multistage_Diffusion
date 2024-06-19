@@ -21,11 +21,23 @@ All models mentioned in the paper could be downloaded [here](https://drive.googl
 ## DPM-Solver
 
 ### Requirements
-
+```sh
+cd dpm-solver/score_sde_pytorch
+conda create -n dpm python=3.8
+conda activate dpm
+pip install -r requirements.txt
+```
 ### Training
+```sh
+torchrun --nproc_per_node=2 --master_port=29502 main.py --config ./configs/vp/cifar10_ncsnpp_multistage_deep_continuous_v2.py --workdir exp/multistage --mode train --config.training.batch_size=128
 
+```
 ### Evaluation
+```sh
+torchrun --nproc_per_node=1 --master_port=29600 main_interval.py --config "configs/vp/cifar10_ncsnpp_multistage_deep_continuous_v2.py" --m1 multistage --workdir exp --eval_folder multistage/eval --config.eval.t_tuples="()" --config.eval.t_converge="(0,)" --config.eval.begin_ckpt=1 --config.eval.end_ckpt=10 --config.eval.batch_size=1024 --config.sampling.steps=20  --config.sampling.eps=1e-4 
+python evaluation_fromsample.py --config "configs/vp/cifar10_ncsnpp_multistage_deep_continuous_v2.py" --workdir exp --eval_folder multistage/eval  --config.eval.begin_ckpt=1 --config.eval.end_ckpt=10 --config.eval.batch_size=1024
 
+```
 ## EDM
 
 ### Requirements
@@ -66,11 +78,21 @@ torchrun --standalone --nproc_per_node=1 fid.py calc --images=../fid-tmp --ref=.
 ## LDM
 
 ### Requirements
-
+```sh
+cd latent-diffusion
+conda create -n ldm python=3.8
+conda activate ldm
+pip install -r requirements.txt
+```
 ### Training
-
+```sh
+python main.py --base configs/celebahq-ldm-vq-4_multistage224-256-192-128.yaml -t --gpus 0,1,2,
+```
 ### Evaluation
-
+```sh
+python scripts/sample_diffusion.py -r DIR_TO_CKPT -l DIR_TO_RESULT_FOLDER -e 0 -c 20 --batch_size 48
+fidelity --gpu 0 --fid --samples-find-deep --input1 data/celebahq/ --input2 DIR_TO_RESULT_FOLDER
+```
 ## Citation
 
 ```
